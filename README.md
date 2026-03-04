@@ -1,0 +1,45 @@
+# Welcome to orange-api
+
+A nextjs simple project
+
+## 開発環境
+以下のように環境構築を行います
+
+* mise
+* mise install
+
+## 開発用セットアップ
+プロジェクト構築後に、以下の手順で実行環境を構築します
+
+```bash
+cd <your-project-name>
+
+# Install dependencies
+pnpm install
+
+# Run formatting and linting (automatically runs on commit)
+pnpm run lint
+pnpm run lint:fix
+pnpm run format
+pnpm run format:fix
+
+# Run typecheck
+pnpm run typecheck
+pnpm run typecheck:full
+
+# Run lint and format before commit
+pnpm run prepare
+
+# Run dev
+pnpm run dev
+
+# Run build
+pnpm run build
+
+# Run Production
+pnpm start
+
+```
+
+## VSCodeでのDevcontainerを利用した開発用セットアップ
+VSCodeの場合、Devcontainerを開きます
