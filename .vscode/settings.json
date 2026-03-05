@@ -32,7 +32,7 @@
     "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
     "*.jsx": "${capture}.js",
     "*.tsx": "${capture}.ts, ${capture}.typegen.ts",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, pnpm-workspace.yaml, .eslintrc.json, next.config.mjs, postcss.config.mjs, tailwind.config.ts, tsconfig.json, next-env.d.ts, .gitignore, next.config.ts, .eslintrc.cjs, .env, .env.example, eslint.config.mjs, eslint.config.js, .lintstagedrc, .prettierrc, .prettierrc.mjs, .prettierignore, .editorconfig, .tool-versions, babel.config.cjs, jest.config.js, mise.toml, LICENSE",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, pnpm-workspace.yaml, .eslintrc.json, next.config.mjs, postcss.config.mjs, tailwind.config.ts, tsconfig.json, next-env.d.ts, .gitignore, next.config.ts, .eslintrc.cjs, .env, .env.example, .env.local, eslint.config.mjs, eslint.config.js, .lintstagedrc, .prettierrc, .prettierrc.mjs, .prettierignore, .editorconfig, .tool-versions, babel.config.cjs, jest.config.js, mise.toml, prisma.config.ts, LICENSE",
     "*.mts": "${capture}.typegen.ts",
     "*.cts": "${capture}.typegen.ts"
   },
