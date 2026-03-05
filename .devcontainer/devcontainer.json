@@ -1,10 +1,8 @@
 {
   "name": "node-devcontainer",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-  "containerEnv": {
-    // allow X11 app
-    "DISPLAY": "${localEnv:DISPLAY}"
-  },
+  "dockerComposeFile": "../docker/docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "features": {
     // python
     "ghcr.io/devcontainers/features/python:1": {
@@ -21,19 +19,13 @@
     },
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
       "packages": "curl,wget,git,jq,ca-certificates,build-essential"
+    },
+    "ghcr.io/itsmechlark/features/postgresql:1": {
+      "version": "latest"
     }
   },
-  "containerUser": "vscode",
-  "remoteUser": "vscode",
-  "runArgs": ["--net=host", "--init"],
-  // "hostRequirements": {
-  // 	"gpu": "optional"
-  // },
   "postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh",
   "postStartCommand": "/bin/sh .devcontainer/postStartCommand.sh",
-  //"workspaceMount": "source=${localWorkspaceFolder}/..,target=/workspaces,type=bind,consistency=cached",
-  //"workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/workspace,type=bind",
-  //"workspaceFolder": "/home/vscode/workspace",
   "customizations": {
     "vscode": {
       "settings": {
