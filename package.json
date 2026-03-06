@@ -24,7 +24,9 @@
     "typecheck": "tsc --skipLibCheck true --noEmit",
     "typecheck:full": "tsc --skipLibCheck false --noEmit",
     "db:migrate": "prisma migrate dev",
-    "db:generate": "prisma generate"
+    "db:generate": "prisma generate",
+    "db:local:migrate": "dotenv -e .env.local -- prisma migrate dev",
+    "db:local:generate": "dotenv -e .env.local -- prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

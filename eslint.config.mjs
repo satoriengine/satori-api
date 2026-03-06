@@ -105,6 +105,7 @@ const eslintConfig = defineConfig([
       'next.config.ts',
       'postcss.config.mjs',
       'tailwind.config.ts',
+      'prisma.config.ts',
     ],
     rules: {
       // 上記ファイルではdefaultを許容する

@@ -1,6 +1,8 @@
-import { PrismaPg } from '@prisma/adapter-pg'; // or the adapter for your database
-import { PrismaClient } from '@/lib/schema/generated/prisma/client';
+// postgresql adapter
+import { PrismaPg } from '@prisma/adapter-pg';
+
 import { env } from '@/lib/schema/env/server';
+import { PrismaClient } from '@/lib/schema/generated/prisma/client';
 
 const adapter = new PrismaPg({ connectionString: env.DATABASE_URL });
 const globalForPrisma = globalThis as unknown as {
