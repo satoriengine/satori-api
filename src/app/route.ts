@@ -1,5 +1,10 @@
-import { NextResponse } from "next/server";
-
+// 文字列を返すのみ
 export async function GET() {
-  return NextResponse.json({ message: "Hello world!" });
+  const text = 'Hello, Bob';
+  return new Response(text, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+    },
+  });
 }
