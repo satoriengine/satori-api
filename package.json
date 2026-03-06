@@ -25,8 +25,10 @@
     "typecheck:full": "tsc --skipLibCheck false --noEmit",
     "db:migrate": "prisma migrate dev",
     "db:generate": "prisma generate",
+    "db:seed": "prisma db seed",
     "db:local:migrate": "dotenv -e .env.local -- prisma migrate dev",
-    "db:local:generate": "dotenv -e .env.local -- prisma generate"
+    "db:local:generate": "dotenv -e .env.local -- prisma generate",
+    "db:local:seed": "dotenv -e .env.local -- prisma db seed"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -67,6 +69,7 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "prisma": "^7.4.2",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5",
     "typescript-eslint": "^8.56.1"
   }
