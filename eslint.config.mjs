@@ -22,6 +22,8 @@ const eslintConfig = defineConfig([
     'build/**',
     'next-env.d.ts',
     '.flowbite-react/**',
+    'src/lib/schema/generated/prisma',
+    'src/lib/schema/generated/zod',
   ]),
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,

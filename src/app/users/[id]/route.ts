@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-import { CreateUserSchema } from '@/app/users/route';
 import { prisma } from '@/db/prisma';
+import { UserUpdateInputObjectSchema } from '@/lib/schema/generated/zod/schemas';
 
 // パラメータの型定義
 type RouteParams = { params: Promise<{ id: string }> };
@@ -26,12 +26,32 @@ export async function PATCH(request: Request, { params }: RouteParams) {
   const { id } = await params;
   const body = await request.json();
 
-  const result = CreateUserSchema.partial().safeParse(body);
+  const result = UserUpdateInputObjectSchema.safeParse(body);
   if (!result.success) {
     return NextResponse.json(
       {
         message: 'validation error',
         errors: z.treeifyError(result.error),
+      },
+      { status: 400 },
+    );
+  }
+
+  // check if exists
+  const exists = await prisma.user.findFirst({
+    where: { id: Number(id) },
+  });
+  if (!exists) {
+    return NextResponse.json(
+      {
+        message: 'validation error',
+        errors: {
+          properties: {
+            email: {
+              errors: ['user does not exist'],
+            },
+          },
+        },
       },
       { status: 400 },
     );

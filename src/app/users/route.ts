@@ -2,14 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
 import { prisma } from '@/db/prisma';
-
-// ユーザー作成時のバリデーション
-export const CreateUserSchema = z.object({
-  email: z.email('メールアドレスの形式が正しくありません'),
-  name: z.string().min(2, '名前は2文字以上必要です').optional(),
-});
-
-export type CreateUserInput = z.infer<typeof CreateUserSchema>;
+import { UserCreateInputObjectSchema } from '@/lib/schema/generated/zod/schemas';
 
 // get all users
 export async function GET() {
@@ -22,7 +15,7 @@ export async function GET() {
 // create new user
 export async function POST(request: Request) {
   const body = await request.json();
-  const result = CreateUserSchema.safeParse(body);
+  const result = UserCreateInputObjectSchema.safeParse(body);
   if (!result.success) {
     return NextResponse.json(
       {
@@ -32,6 +25,27 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
+
+  // unique check
+  const exists = await prisma.user.findFirst({
+    where: { email: result.data.email },
+  });
+  if (exists) {
+    return NextResponse.json(
+      {
+        message: 'validation error',
+        errors: {
+          properties: {
+            email: {
+              errors: ['mail already exists'],
+            },
+          },
+        },
+      },
+      { status: 400 },
+    );
+  }
+
   // create user
   const newUser = await prisma.user.create({
     data: result.data,

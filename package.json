@@ -1,7 +1,7 @@
 {
   "name": "orange-api",
   "version": "0.0.1",
-  "description": "A nextjs simple project",
+  "description": "API project",
   "author": "Hiroshi Fujiwara",
   "license": "MIT",
   "private": true,
@@ -28,7 +28,8 @@
     "db:seed": "prisma db seed",
     "db:local:migrate": "dotenv -e .env.local -- prisma migrate dev",
     "db:local:generate": "dotenv -e .env.local -- prisma generate",
-    "db:local:seed": "dotenv -e .env.local -- prisma db seed"
+    "db:local:seed": "dotenv -e .env.local -- prisma db seed",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -68,6 +69,7 @@
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "prisma": "^7.4.2",
+    "prisma-zod-generator": "^2.1.4",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5",

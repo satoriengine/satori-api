@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "input": {
+      "enabled": true,
+      "partial": true
+    },
+    "result": {
+      "enabled": true,
+      "partial": false
+    }
+  }
+}
