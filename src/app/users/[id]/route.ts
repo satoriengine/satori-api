@@ -11,6 +11,7 @@ type RouteParams = { params: Promise<{ id: string }> };
 export async function GET(request: Request, { params }: RouteParams) {
   const { id } = await params;
   const user = await prisma.user.findUnique({
+    select: { id: true, name: true, email: true },
     where: { id: Number(id) },
   });
 
