@@ -20,6 +20,8 @@ jobs:
           cache: true
       - name: Install package
         run: pnpm install
+      - name: Generate Prisma Client
+        run: pnpm exec prisma generate
       - name: Run lint
         run: pnpm run lint:fix
       - name: Run format
