@@ -28,6 +28,9 @@
       "version": "latest"
     }
   },
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+  ],
   "postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh",
   "postStartCommand": "/bin/sh .devcontainer/postStartCommand.sh",
   "customizations": {
