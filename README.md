@@ -1,14 +1,16 @@
-# Welcome to orange-api
+# Welcome to satori-api
 
-A nextjs simple project
+A nextjs'project satori-api
 
 ## 開発環境
+
 以下のように環境構築を行います
 
-* mise
-* mise install
+- mise
+- mise install
 
 ## 開発用セットアップ
+
 プロジェクト構築後に、以下の手順で実行環境を構築します
 
 ```bash
@@ -42,4 +44,5 @@ pnpm start
 ```
 
 ## VSCodeでのDevcontainerを利用した開発用セットアップ
+
 VSCodeの場合、Devcontainerを開きます

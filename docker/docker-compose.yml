@@ -6,7 +6,7 @@ services:
       dockerfile: ./Dockerfile
     tty: true
     volumes:
-      - ..:/workspaces/orange-api:cached
+      - ..:/workspaces/satori-api:cached
     #environment:
     #  # db info to connect postgresql
     #  DATABASE_URL: 'postgresql://user:password@db:5432/mydatabase'
