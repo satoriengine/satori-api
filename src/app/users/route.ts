@@ -1,15 +1,13 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-import { prisma } from '@/db/prisma';
+import { createUser, getUserByEmail, getUsers } from '@/db/user';
 import { UserCreateInputObjectSchema } from '@/lib/schema/generated/zod/schemas';
 
 // get all users
 export async function GET() {
-  const user = await prisma.user.findMany({
-    select: { id: true, name: true, email: true },
-  });
-  return NextResponse.json(user);
+  const users = await getUsers();
+  return NextResponse.json(users);
 }
 
 // create new user
@@ -27,10 +25,8 @@ export async function POST(request: Request) {
   }
 
   // unique check
-  const exists = await prisma.user.findFirst({
-    where: { email: result.data.email },
-  });
-  if (exists) {
+  const user = await getUserByEmail(result.data.email);
+  if (user) {
     return NextResponse.json(
       {
         message: 'validation error',
@@ -47,8 +43,6 @@ export async function POST(request: Request) {
   }
 
   // create user
-  const newUser = await prisma.user.create({
-    data: result.data,
-  });
+  const newUser = await createUser(result.data);
   return NextResponse.json(newUser, { status: 201 });
 }

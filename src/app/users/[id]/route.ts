@@ -1,24 +1,19 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-import { prisma } from '@/db/prisma';
+import { deleteUser, getUserById, updateUser } from '@/db/user';
 import { UserUpdateInputObjectSchema } from '@/lib/schema/generated/zod/schemas';
 
-// パラメータの型定義
-type RouteParams = { params: Promise<{ id: string }> };
+import type { RouteParams } from '@/types/page';
 
 // get one user
 export async function GET(request: Request, { params }: RouteParams) {
   const { id } = await params;
-  const user = await prisma.user.findUnique({
-    select: { id: true, name: true, email: true },
-    where: { id: Number(id) },
-  });
-
+  const user = await getUserById(Number(id));
+  // check user exists
   if (!user) {
     return NextResponse.json({ error: 'User not found' }, { status: 404 });
   }
-
   return NextResponse.json(user);
 }
 
@@ -39,10 +34,8 @@ export async function PATCH(request: Request, { params }: RouteParams) {
   }
 
   // check if exists
-  const exists = await prisma.user.findFirst({
-    where: { id: Number(id) },
-  });
-  if (!exists) {
+  const user = await getUserById(Number(id));
+  if (!user) {
     return NextResponse.json(
       {
         message: 'validation error',
@@ -59,10 +52,7 @@ export async function PATCH(request: Request, { params }: RouteParams) {
   }
 
   // update user
-  const updatedUser = await prisma.user.update({
-    where: { id: Number(id) },
-    data: result.data,
-  });
+  const updatedUser = await updateUser(user.id, result.data);
   return NextResponse.json(updatedUser);
 }
 
@@ -70,10 +60,7 @@ export async function PATCH(request: Request, { params }: RouteParams) {
 export async function DELETE(request: Request, { params }: RouteParams) {
   try {
     const { id } = await params;
-    await prisma.user.delete({
-      where: { id: Number(id) },
-    });
-
+    await deleteUser(Number(id));
     return new NextResponse(null, { status: 204 });
   } catch (_error) {
     return NextResponse.json(

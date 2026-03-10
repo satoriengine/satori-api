@@ -8,7 +8,7 @@ const html = `<!DOCTYPE html>
     <title>Hello, World</title>
   </head>
   <body>
-    <h1>About</h1>
+    <h1>Hello</h1>
     <h2>This site is API service</h2>
     <ul>
       <li>Name: Bob</li>

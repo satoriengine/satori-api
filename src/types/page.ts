@@ -5,3 +5,5 @@ export type LayoutProps = {
 export type PageProps = {
   children: React.ReactNode;
 };
+
+export type RouteParams = { params: Promise<{ id: string }> };
