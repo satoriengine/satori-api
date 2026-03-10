@@ -1,4 +1,4 @@
-// シンプルなHTMLを返す
+// /helloでHTMLを返す
 import { NextResponse } from 'next/server';
 
 const html = `<!DOCTYPE html>

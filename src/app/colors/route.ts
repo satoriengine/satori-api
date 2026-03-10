@@ -1,4 +1,5 @@
 // 文字列を改行区切りで返す
+// JSONではなく、テキストを返すことに注意
 export async function GET() {
   const colors = ['red', 'blue', 'green', 'yellow'];
   return new Response(colors.join('\n'), {

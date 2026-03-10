@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
+// 特に意味はないURL
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> },
