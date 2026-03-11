@@ -2,14 +2,14 @@
 import { NextResponse } from 'next/server';
 
 const html = `<!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>Hello, World</title>
   </head>
   <body>
     <h1>Hello</h1>
-    <h2>This site is API service</h2>
+    <h2>This is API service</h2>
     <ul>
       <li>Name: Bob</li>
       <li>Age: 18</li>
