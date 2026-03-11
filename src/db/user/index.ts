@@ -8,6 +8,9 @@ import type {
 export async function getUsers() {
   const users = await prisma.user.findMany({
     select: { id: true, name: true, email: true },
+    orderBy: {
+      id: 'asc',
+    },
   });
   return users;
 }
