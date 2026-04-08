@@ -1,3 +1,5 @@
+name: satori-api
+
 services:
   app:
     container_name: app-container
