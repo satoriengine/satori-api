@@ -5,11 +5,13 @@
   "dictionaries": [],
   "words": [
     "autoincrement",
+    "esbuild",
     "flowbite",
     "googleapiclient",
     "Hiroshi",
     "Kbbg",
-    "treeify"
+    "treeify",
+    "unrs"
   ],
   "ignoreWords": [],
   "import": []
