@@ -1,6 +1,5 @@
 import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
-import nextTs from 'eslint-config-next/typescript';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
@@ -11,9 +10,20 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// nextVitals 内部の @typescript-eslint プラグイン定義を除去して競合を防ぐ
+const cleanedNextVitals = nextVitals.map((config) => {
+  if (config.plugins?.['@typescript-eslint']) {
+    const { '@typescript-eslint': _, ...restPlugins } = config.plugins;
+    return {
+      ...config,
+      plugins: restPlugins,
+    };
+  }
+  return config;
+});
+
 const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
+  // 1. グローバル Ignore 設定
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
@@ -25,10 +35,18 @@ const eslintConfig = defineConfig([
     'src/lib/schema/generated/prisma',
     'src/lib/schema/generated/zod',
   ]),
+
+  // 2. Next.js 設定
+  // ...nextVitals,
+  // ...nextTs,
+  ...cleanedNextVitals,
+
+  // 3. TypeScript 厳格設定
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
+
+  // 4. @typescript-eslint の言語オプション & ルール設定
   {
-    // @typescript-eslintに関する設定
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
@@ -64,6 +82,8 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+
+  // 5. import 関連の設定
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
@@ -100,6 +120,8 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+
+  // 6. 特定ファイルでの default export 許容設定
   {
     files: [
       '**/page.tsx',
@@ -122,6 +144,8 @@ const eslintConfig = defineConfig([
       'import/prefer-default-export': 'error',
     },
   },
+
+  // 7. 未使用 import 関連の設定s
   {
     // eslint-plugin-unused-imports の設定
     plugins: { 'unused-imports': unusedImportsPlugin },
@@ -141,6 +165,8 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+
+  // 8. React 関連の設定
   {
     // eslint-plugin-react の設定
     settings: {
@@ -172,6 +198,8 @@ const eslintConfig = defineConfig([
       'react-hooks/exhaustive-deps': 'error', // recommended では warn のため error に上書き
     },
   },
+
+  // 9. Prettier とのバッティング回避設定
   prettierConfig,
 ]);
 
