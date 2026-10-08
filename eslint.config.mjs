@@ -3,6 +3,7 @@ import nextVitals from 'eslint-config-next/core-web-vitals';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
+import reactCompilerPlugin from 'eslint-plugin-react-compiler';
 import prettierConfig from 'eslint-config-prettier';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -199,7 +200,17 @@ const eslintConfig = defineConfig([
     },
   },
 
-  // 9. Prettier とのバッティング回避設定
+  // 9. React Compiler 設定
+  {
+    plugins: {
+      'react-compiler': reactCompilerPlugin,
+    },
+    rules: {
+      'react-compiler/react-compiler': 'error',
+    },
+  },
+
+  // 10. Prettier とのバッティング回避設定
   prettierConfig,
 ]);
 
