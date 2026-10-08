@@ -25,12 +25,13 @@ export function MyForm() {
     console.log(result);
     if (!result.success) {
       // サーバー側バリデーション失敗なら、エラーを表示する
-      getKeys(result.error.fieldErrors).map((key) => {
-        const message = result.error.fieldErrors[key]
-          ? result.error.fieldErrors[key][0]
-          : '';
+      const fieldErrors = result.error.fieldErrors;
+
+      for (const key of getKeys(fieldErrors)) {
+        const messages = fieldErrors[key];
+        const message = messages?.[0] ?? '';
         setError(key, { message });
-      });
+      }
     } else {
       alert(JSON.stringify(result.data));
     }
